@@ -22,11 +22,11 @@ class TranslatorTest {
     void testTranslateFile() {
 
         assertAll(() -> assertEquals(
-                        Translator.translateFile("English", "Romanian", "/Users/georgeile/Desktop/parent-project/translator/src/fileToConvert.txt"),
+                        Translator.translateFile("English", "Romanian", "src/main/resources/files-to-translate/firstFileToConvert.txt"),
                         "Toti dintre voi vreti merele gustoase si frumoase. Eu iubesc doar merele rosii! Marul este gustos."),
                 () -> assertEquals(
                         Translator.translateFile("English", "Romanian",
-                                "/Users/georgeile/Desktop/parent-project/translator/src/secondFileToConvert.txt"),
+                                "src/main/resources/files-to-translate/secondFileToConvert.txt"),
                         "Eu vreau zece mere gustoase. Merele sunt foarte bune pentru sanatatea noastra! Soferul conduce rapid. Ea este rapida."));
     }
 
