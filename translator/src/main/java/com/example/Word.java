@@ -1,3 +1,4 @@
+package com.example;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +54,7 @@ public class Word {
 
     /**
      *
-     * properly creating a new Word instance
+     * properly creating a new com.example.Word instance
      */
     public Word(String[] characteristics) {
 
@@ -101,7 +102,7 @@ public class Word {
 
     @Override
     public String toString() {
-        return "Word [conversion=" + conversion + ", mORf=" + mORf + ", partOfSpeech=" + partOfSpeech
+        return "com.example.Word [conversion=" + conversion + ", mORf=" + mORf + ", partOfSpeech=" + partOfSpeech
                 + ", singularOrPlural=" + singularOrPlural + ", word=" + word + "]";
     }
 

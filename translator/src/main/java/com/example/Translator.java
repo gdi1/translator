@@ -1,3 +1,4 @@
+package com.example;
 
 import java.io.*;
 import java.nio.file.*;
@@ -10,8 +11,8 @@ public class Translator {
     private static final Map<List<String>, String> dictionaries = Translator.getDictionaries();
 
     /**
-     * @param translateFrom the language from which the translation takes place
-     * @param translateTo the language to which the translation takes place
+     * @param translateFrom         the language from which the translation takes place
+     * @param translateTo           the language to which the translation takes place
      * @param pathToFileToTranslate path to the file that needs to be translated
      * @return returns the translated version of the entire file
      * @throws IOException
@@ -56,7 +57,7 @@ public class Translator {
 
     /**
      * @param translateFrom the language from which the translation takes place
-     * @param translateTo the language to which the translation takes place
+     * @param translateTo   the language to which the translation takes place
      * @param sentence      the sentence that needs to be translated
      * @return returns the translated version of the sentence
      */
@@ -75,12 +76,16 @@ public class Translator {
         for (int i = 0; i < sentenceSplit.length; i++) {
 
             if (translateFrom.equals("English") && translateTo.equals("Romanian")) {
-                sb = translateFromEnglishToRomanian(sb, wordsDictionary, sentenceSplit, i, nounsAlreadyConverted);
+                translateFromEnglishToRomanian(sb, wordsDictionary, sentenceSplit, i, nounsAlreadyConverted);
+            } else if (translateFrom.equals("English") && translateTo.equals("English")){
+                return "Yes yes";
             }
         }
         String result = sb.toString().trim();
-
-        return (result.substring(0, 1).toUpperCase() + result.substring(1) + punctuation);
+        if(result.length() != 0){
+            return (result.substring(0, 1).toUpperCase() + result.substring(1) + punctuation);
+        }
+            return null;
     }
 
     /**
@@ -132,28 +137,30 @@ public class Translator {
     }
 
     /**
-     * Reads all the words from the txt file and constructs corresponding Word
+     * Reads all the words from the txt file and constructs corresponding com.example.Word
      * objects
      *
      * @param pathToDictionary path to the dictionary
-     * @return returns the list of Word objects newly created
+     * @return returns the list of com.example.Word objects newly created
      */
     public static List<Word> readWordsFromDictionary(String pathToDictionary) {
-        List<String> dictionary = new ArrayList<String>();
+        List<String> dictionary = new ArrayList<>();
 
         try {
             dictionary = Files.readAllLines(Paths.get(pathToDictionary));
         } catch (Exception e) {
-            e.printStackTrace();
+
+            System.out.println("Path to dictionary is null.");
+            return new ArrayList<>();
         }
 
-        return dictionary.stream().map(line -> new Word(line.split(","))).collect(Collectors.toList());
+        return dictionary.stream().map(line -> new Word(line.split(","))).toList();
     }
 
     public static Map<List<String>, String> getDictionaries() {
 
         Map<List<String>, String> dictionaries = new HashMap<>();
-        dictionaries.put(Arrays.asList("English", "Romanian"), "src/main/resources/scripts/dictionary.txt");
+        dictionaries.put(Arrays.asList("English", "Romanian"), "/Users/georgeile/IdeaProjects/project-translator/translator/src/main/resources/scripts/dictionary.txt");
 
         return dictionaries;
     }
